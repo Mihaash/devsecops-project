@@ -7,12 +7,6 @@ pipeline {
    }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git branch: 'main', credentialsId: 'GitlabCred', url: 'https://github.com/Mihaash/devsecops.git'
-      }
-    }
-  
    stage('Stage I: Build') {
       steps {
         echo "Building Jar Component ..."

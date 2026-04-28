@@ -11,7 +11,6 @@ pipeline {
   stages {
    stage('Stage I: Build') {
       steps {
-        git branch: 'main', credentialsId: 'GitlabCred', url: 'https://github.com/Mihaash/devsecops.git'
         echo "Building Jar Component ..."
         sh "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk; mvn clean package "
       }
