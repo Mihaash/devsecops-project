@@ -129,10 +129,14 @@
               </executions>
               <configuration>
                  <formats>
-                 <format>json</format>
-                 <format>html</format>
+                    <format>json</format>
+                    <format>html</format>
                  </formats>
                  <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>
+                 <nvdApiKey>${nvd.api.key}</nvdApiKey>
+                 <nvdApiAnalyzerEnabled>true</nvdApiAnalyzerEnabled>
+                 <nvdMaxRetryCount>10</nvdMaxRetryCount>
+                 <nvdDelay>5000</nvdDelay>
               </configuration>
              </plugin>
 	    <plugin>

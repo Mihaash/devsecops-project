@@ -25,7 +25,7 @@ pipeline {
       steps { 
         echo "Running Software Composition Analysis using OWASP Dependency-Check ..."
         withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
-            sh 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk; mvn org.owasp:dependency-check-maven:12.1.0:check -Dnvd.api.key=$NVD_API_KEY -Dnvd.delay=5000 -DossindexAnalyzerEnabled=false'
+            sh 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk; mvn dependency-check:check -Dnvd.api.key=$NVD_API_KEY'
         }
       }
     }
@@ -68,7 +68,7 @@ pipeline {
    stage('Stage VII: Scan Image ') {
       steps { 
         echo "Scanning Image for Vulnerabilities"
-        sh "trivy image --scanners vuln --offline-scan ${registry}:latest > trivyresults.txt"
+        sh "trivy image --timeout 20m --scanners vuln --offline-scan ${registry}:latest > trivyresults.txt"
         }
     }
           
