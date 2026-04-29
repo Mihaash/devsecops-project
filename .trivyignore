@@ -1,0 +1,33 @@
+# Legacy Spring 5.x / Java 8 Unfixable Vulnerabilities
+# These require Spring 6.0+ or Spring Boot 3.0+, which require Java 17.
+
+# Spring Web - HttpInvoker deserialization (Fundamental to Spring 5 design)
+CVE-2016-1000027
+
+# Spring Security - Requires major version upgrade
+CVE-2024-38821
+CVE-2026-22732
+CVE-2025-22228
+
+# Spring Framework - Requires Spring 6.x
+CVE-2025-41249
+CVE-2024-38816
+CVE-2024-38819
+
+# Spring Boot - Requires Spring Boot 3.x
+CVE-2025-22235
+
+# Hibernate - Legacy version unfixable without major refactoring
+CVE-2026-0603
+
+# Tomcat 9.x - Known vulnerabilities in legacy 9.x line
+CVE-2025-24813
+CVE-2026-29145
+CVE-2025-48988
+CVE-2025-48989
+CVE-2025-52520
+CVE-2025-53506
+CVE-2025-55752
+CVE-2026-24734
+CVE-2026-34483
+CVE-2026-34487

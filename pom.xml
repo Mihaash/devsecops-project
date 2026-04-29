@@ -32,13 +32,13 @@
         <io.springfox.springfox-swagger2>3.0.0</io.springfox.springfox-swagger2>
         <io.springfox.springfox-swagger-ui>3.0.0</io.springfox.springfox-swagger-ui>
         <!-- Security Overrides -->
-        <tomcat.version>9.0.99</tomcat.version>
-        <jackson-bom.version>2.15.4</jackson-bom.version>
-        <snakeyaml.version>2.0</snakeyaml.version>
+        <tomcat.version>9.0.98</tomcat.version>
+        <jackson-bom.version>2.17.2</jackson-bom.version>
+        <snakeyaml.version>2.3</snakeyaml.version>
         <logback.version>1.2.13</logback.version>
         <h2.version>2.2.224</h2.version>
-        <spring-security.version>5.7.13</spring-security.version>
-        <spring-framework.version>5.3.34</spring-framework.version>
+        <spring-security.version>5.8.14</spring-security.version>
+        <spring-framework.version>5.3.37</spring-framework.version>
     </properties>
 
     <dependencies>
