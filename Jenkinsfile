@@ -68,7 +68,7 @@ pipeline {
    stage('Stage VII: Scan Image ') {
       steps { 
         echo "Scanning Image for Vulnerabilities"
-        sh "trivy image --timeout 20m --scanners vuln --offline-scan ${registry}:latest > trivyresults.txt"
+        sh 'trivy image --severity HIGH,CRITICAL,MEDIUM --exit-code 1 ${registry}:latest > trivyresults.txt'
         }
     }
           
