@@ -77,8 +77,11 @@ pipeline {
                 echo "Building Docker Image ..."
                 script {
                     docker.withRegistry('', registryCredential) {
-                        def image = docker.build("${registry}:latest")
-                        image.push()
+                        def image = docker.build("${registry}:${env.BUILD_NUMBER}")
+                        retry(3) {
+                            image.push()
+                            image.push("latest")
+                        }
                     }
                 }
             }

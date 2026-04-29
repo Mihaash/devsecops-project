@@ -61,7 +61,10 @@ pipeline {
         script {
                docker.withRegistry( '', registryCredential ) { 
                  myImage = docker.build registry + ":$BUILD_NUMBER" 
-                 myImage.push()
+                 retry(3) {
+                   myImage.push()
+                   myImage.push("latest")
+                 }
                 }
         }
       }
