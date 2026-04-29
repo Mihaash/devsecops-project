@@ -76,9 +76,9 @@ pipeline {
             steps {
                 echo "Building Docker Image ..."
                 script {
-                    docker.withRegistry('', registryCredential) {
-                        def image = docker.build("${registry}:${env.BUILD_NUMBER}")
-                        retry(3) {
+                    retry(3) {
+                        docker.withRegistry('', registryCredential) {
+                            def image = docker.build("${registry}:${env.BUILD_NUMBER}")
                             image.push()
                             image.push("latest")
                         }

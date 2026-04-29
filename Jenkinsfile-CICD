@@ -59,13 +59,13 @@ pipeline {
       steps { 
         echo "Build Docker Image"
         script {
-               docker.withRegistry( '', registryCredential ) { 
-                 myImage = docker.build registry + ":$BUILD_NUMBER" 
-                 retry(3) {
+               retry(3) {
+                 docker.withRegistry( '', registryCredential ) { 
+                   myImage = docker.build registry + ":$BUILD_NUMBER" 
                    myImage.push()
                    myImage.push("latest")
                  }
-                }
+               }
         }
       }
     }
