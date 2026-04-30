@@ -94,7 +94,7 @@ pipeline {
                 sh """
                 trivy image \
                 --timeout 20m \
-                --severity HIGH,CRITICAL \
+                --severity HIGH,CRITICAL,MEDIUM \
                 --exit-code 1 \
                 ${registry}:latest > trivyresults.txt
                 """
