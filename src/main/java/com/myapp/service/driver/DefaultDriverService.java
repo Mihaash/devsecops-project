@@ -7,8 +7,6 @@ import com.myapp.domainvalue.GeoCoordinate;
 import com.myapp.domainvalue.OnlineStatus;
 import com.myapp.exception.ConstraintsViolationException;
 import com.myapp.exception.EntityNotFoundException;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,9 +24,6 @@ public class DefaultDriverService implements DriverService
     private static org.slf4j.Logger LOG = LoggerFactory.getLogger(DefaultDriverService.class);
 
     private final DriverRepository driverRepository;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
 
     public DefaultDriverService(final DriverRepository driverRepository)
@@ -138,8 +133,7 @@ public class DefaultDriverService implements DriverService
     @Override
     public List<DriverDO> findByUsername(String username)
     {
-        String query = "SELECT d FROM DriverDO d WHERE d.username = '" + username + "'";
-        return entityManager.createQuery(query, DriverDO.class).getResultList();
+        return driverRepository.findByUsername(username);
     }
 
 

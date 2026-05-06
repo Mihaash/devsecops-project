@@ -71,9 +71,8 @@ public class DriverControllerTest {
     @Test
     public void findDriversFilteringByUsername() throws Exception {
         List<DriverDO> drivers = new ArrayList<>();
-        drivers.add(mockDriver);
         drivers.add(mockDriver2);
-        Mockito.when(driverService.findAll()).thenReturn(drivers);
+        Mockito.when(driverService.findByUsername("user02")).thenReturn(drivers);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                 "/v1/drivers?username=user02").accept(
