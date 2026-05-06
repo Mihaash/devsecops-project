@@ -94,12 +94,15 @@ public class DriverController {
                                        @RequestParam(required = false) Boolean deleted)
             throws ConstraintsViolationException, EntityNotFoundException {
 
-        List<DriverDO> drivers = Lists.newArrayList(driverService.findAll());
+        List<DriverDO> drivers;
+        if (username != null) {
+            drivers = driverService.findByUsername(username);
+        } else {
+            drivers = Lists.newArrayList(driverService.findAll());
+        }
+
         if (onlineStatus != null) {
             drivers = drivers.stream().filter(driver -> driver.getOnlineStatus() == onlineStatus).collect(Collectors.toList());
-        }
-        if (username != null) {
-            drivers = drivers.stream().filter(driver -> driver.getUsername().equals(username)).collect(Collectors.toList());
         }
         if (deleted != null) {
             drivers = drivers.stream().filter(driver -> driver.getDeleted().equals(deleted)).collect(Collectors.toList());

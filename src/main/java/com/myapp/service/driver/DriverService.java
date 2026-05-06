@@ -24,4 +24,6 @@ public interface DriverService
 
     Iterable<DriverDO> findAll();
 
+    List<DriverDO> findByUsername(String username);
+
 }
