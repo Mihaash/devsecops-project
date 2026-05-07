@@ -60,7 +60,7 @@ pipeline {
                 echo "Checking Quality Gate ..."
                 script {
                     try {
-                        timeout(time: 10, unit: 'MINUTES') {
+                        timeout(time: 5, unit: 'MINUTES') {
                             def qg = waitForQualityGate()
                             if (qg.status != 'OK') {
                                 echo "⚠️ Quality Gate failed: ${qg.status} (continuing pipeline)"
