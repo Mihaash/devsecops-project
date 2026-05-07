@@ -37,8 +37,9 @@
         <snakeyaml.version>2.3</snakeyaml.version>
         <logback.version>1.2.13</logback.version>
         <h2.version>2.2.224</h2.version>
-        <spring-security.version>5.8.14</spring-security.version>
-        <spring-framework.version>5.3.37</spring-framework.version>
+        <spring-security.version>5.8.15</spring-security.version>
+        <spring-framework.version>5.3.39</spring-framework.version>
+        <log4j2.version>2.23.1</log4j2.version>
     </properties>
 
     <dependencies>
