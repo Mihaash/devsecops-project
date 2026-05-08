@@ -6,6 +6,7 @@ RUN java -Djarmode=layertools -jar app.jar extract
 
 # Stage 2: build image
 FROM eclipse-temurin:8-jre-alpine
+RUN apk update && apk upgrade
 WORKDIR /opt/app
 COPY --from=builder /opt/app/dependencies/ ./
 COPY --from=builder /opt/app/spring-boot-loader/ ./

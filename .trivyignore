@@ -16,6 +16,7 @@ CVE-2024-38819
 
 # Spring Boot - Requires Spring Boot 3.x
 CVE-2025-22235
+CVE-2026-40973
 
 # Hibernate - Legacy version unfixable without major refactoring
 CVE-2026-0603
