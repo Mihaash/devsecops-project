@@ -1,13 +1,10 @@
 pipeline {
     agent any
-
     environment {
         registry = "mickey06/democicd"
         registryCredential = "docker-creds"
     }
-
     stages {
-
         // 🔹 Stage 1: Build
         stage('Stage I: Build') {
             steps {
@@ -15,7 +12,6 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-
         // 🔹 Stage 2: Code Coverage
         stage('Stage II: Code Coverage') {
             steps {
@@ -23,7 +19,6 @@ pipeline {
                 sh 'mvn jacoco:report'
             }
         }
-
         // 🔹 Stage 3: SCA (Dependency Check)
         stage('Stage III: SCA') {
             steps {
@@ -37,7 +32,6 @@ pipeline {
                 }
             }
         }
-
         // 🔹 Stage 4: SAST (SonarQube)
         stage('Stage IV: SAST') {
             steps {
@@ -53,7 +47,6 @@ pipeline {
                 }
             }
         }
-
         // 🔹 Stage 5: Quality Gate (Non-blocking for learning)
         stage('Stage V: Quality Gate') {
             steps {
@@ -74,7 +67,6 @@ pipeline {
                 }
             }
         }
-
         // 🔹 Stage 6: Build & Push Docker Image
         stage('Stage VI: Build Image') {
             steps {
@@ -90,7 +82,6 @@ pipeline {
                 }
             }
         }
-
         // 🔹 Stage 7: Trivy Scan (Fail only on HIGH/CRITICAL)
         stage('Stage VII: Scan Image') {
             steps {
@@ -104,7 +95,6 @@ pipeline {
                 """
             }
         }
-
         // 🔹 Stage 8: Smoke Test
         stage('Stage VIII: Smoke Test') {
             steps {
@@ -117,7 +107,6 @@ pipeline {
             }
         }
     }
-
     // 🔹 Post Actions
     post {
         always {
