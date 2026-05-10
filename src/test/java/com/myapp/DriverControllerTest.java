@@ -8,17 +8,18 @@ import com.myapp.domainvalue.OnlineStatus;
 import com.myapp.exception.CarAlreadyInUseException;
 import com.myapp.service.car.CarService;
 import com.myapp.service.driver.DriverService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -27,20 +28,21 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(value = DriverController.class)
-public class DriverControllerTest {
+@AutoConfigureMockMvc(addFilters = false)
+class DriverControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private DriverService driverService;
 
-    @MockBean
+    @MockitoBean
     private CarService carService;
 
     DriverDO mockDriver = new DriverDO("user01", "password");
@@ -52,7 +54,7 @@ public class DriverControllerTest {
     CarDO mockCarResult = new CarDO("5432PW", 4, false, 10, EngineType.GAS, "MERCEDES");
 
     @Test
-    public void findDriver() throws Exception {
+    void findDriver() throws Exception {
 
         Mockito.when(driverService.find(Mockito.anyLong())).thenReturn(mockDriver);
 
@@ -69,7 +71,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void findDriversFilteringByUsername() throws Exception {
+    void findDriversFilteringByUsername() throws Exception {
         List<DriverDO> drivers = new ArrayList<>();
         drivers.add(mockDriver2);
         Mockito.when(driverService.findByUsername("user02")).thenReturn(drivers);
@@ -87,7 +89,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void findDriversFilteringByOnlineStatusOnline() throws Exception {
+    void findDriversFilteringByOnlineStatusOnline() throws Exception {
         List<DriverDO> drivers = new ArrayList<>();
         drivers.add(mockDriver);
         drivers.add(mockDriver2);
@@ -109,7 +111,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void findDriversFilteringByOnlineStatusOffline() throws Exception {
+    void findDriversFilteringByOnlineStatusOffline() throws Exception {
         List<DriverDO> drivers = new ArrayList<>();
         drivers.add(mockDriver);
         drivers.add(mockDriver2);
@@ -131,7 +133,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void createDriver() throws Exception {
+    void createDriver() throws Exception {
 
         DriverDO mockDriverResult = new DriverDO("user","password");
         mockDriverResult.setId(9L);
@@ -153,7 +155,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void selectCar() throws Exception {
+    void selectCar() throws Exception {
 
         DriverDO mockDriverResult = new DriverDO("user","password");
 
@@ -173,7 +175,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void selectAnAlreadySelectedCar() throws Exception {
+    void selectAnAlreadySelectedCar() throws Exception {
 
         Mockito.doThrow(CarAlreadyInUseException.class).when(carService).addDriver(1L, "5432PW");
 
@@ -191,7 +193,7 @@ public class DriverControllerTest {
     }
 
     @Test
-    public void deselectCar() throws Exception {
+    void deselectCar() throws Exception {
 
         DriverDO mockDriverResult = new DriverDO("user","password");
         CarDO mockCarResult = new CarDO("5432PW", 4, false, 10, EngineType.GAS, "MERCEDES");

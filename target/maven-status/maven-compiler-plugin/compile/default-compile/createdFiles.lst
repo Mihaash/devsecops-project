@@ -1,6 +1,4 @@
 com/myapp/domainvalue/OnlineStatus.class
-com/myapp/datatransferobject/CarDTO$1.class
-com/myapp/datatransferobject/DriverDTO$1.class
 com/myapp/security/MessageSecurityWebApplicationInitializer.class
 com/myapp/controller/HomeController.class
 com/myapp/dataaccessobject/CarRepository.class

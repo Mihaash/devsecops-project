@@ -1,12 +1,12 @@
 package com.myapp.util;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
-public class LoggingInterceptor extends HandlerInterceptorAdapter
+public class LoggingInterceptor implements HandlerInterceptor
 {
 
     private static final Log LOG = LogFactory.getLog(LoggingInterceptor.class);
