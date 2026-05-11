@@ -1,5 +1,6 @@
 package com.myapp.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -16,6 +17,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    @Value("${security.user.name}")
+    private String username;
+
+    @Value("${security.user.password}")
+    private String password;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -24,8 +31,8 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.builder()
-            .username("user")
-            .password(passwordEncoder().encode("password"))
+            .username(username)
+            .password(passwordEncoder().encode(password))
             .roles("ADMIN")
             .build();
         return new InMemoryUserDetailsManager(user);
