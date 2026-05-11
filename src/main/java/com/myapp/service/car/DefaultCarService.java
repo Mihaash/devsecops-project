@@ -41,14 +41,14 @@ public class DefaultCarService implements CarService {
     @Override
     @Transactional
     public CarDO create(CarDO carDO) throws ConstraintsViolationException {
-        CarDO driver;
+        CarDO car;
         try {
-            driver = carRepository.save(carDO);
+            car = carRepository.save(carDO);
         } catch (DataIntegrityViolationException e) {
-            LOG.warn("Some constraints are thrown due to driver creation", e);
+            LOG.warn("Some constraints are thrown due to car creation", e);
             throw new ConstraintsViolationException(e.getMessage());
         }
-        return driver;
+        return car;
     }
 
     @Override

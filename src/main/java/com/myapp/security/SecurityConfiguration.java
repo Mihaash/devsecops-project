@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -15,10 +17,15 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
+        UserDetails user = User.builder()
             .username("user")
-            .password("password")
+            .password(passwordEncoder().encode("password"))
             .roles("ADMIN")
             .build();
         return new InMemoryUserDetailsManager(user);
@@ -26,8 +33,10 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+        http.csrf(csrf -> csrf.disable()) // Still disabled for REST API, but better to be explicit or use JWT
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/v1/**").authenticated()
+                .anyRequest().permitAll())
             .httpBasic(Customizer.withDefaults());
         return http.build();
     }
