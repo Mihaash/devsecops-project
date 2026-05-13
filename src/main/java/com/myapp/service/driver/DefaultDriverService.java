@@ -97,18 +97,16 @@ public class DefaultDriverService implements DriverService
      */
     @Override
     @Transactional
-    public void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException, ConstraintsViolationException {
+    public void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException {
         DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setCoordinate(new GeoCoordinate(latitude, longitude));
-        create(driverDO);
     }
 
     @Override
     @Transactional
-    public void updateCar(long driverId, CarDO carDO) throws EntityNotFoundException, ConstraintsViolationException {
+    public void updateCar(long driverId, CarDO carDO) throws EntityNotFoundException {
         DriverDO driverDO = findDriverChecked(driverId);
         driverDO.setCar(carDO);
-        create(driverDO);
     }
 
 

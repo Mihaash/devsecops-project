@@ -16,9 +16,9 @@ public interface DriverService
 
     void delete(Long driverId) throws EntityNotFoundException;
 
-    void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException, ConstraintsViolationException;
+    void updateLocation(long driverId, double longitude, double latitude) throws EntityNotFoundException;
 
-    void updateCar(long driverId, CarDO carDO) throws EntityNotFoundException, ConstraintsViolationException;
+    void updateCar(long driverId, CarDO carDO) throws EntityNotFoundException;
 
     List<DriverDO> find(OnlineStatus onlineStatus);
 

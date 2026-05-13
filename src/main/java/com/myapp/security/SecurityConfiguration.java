@@ -41,7 +41,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Safe to disable for stateless REST APIs not using cookies
+        http.csrf(csrf -> csrf.disable()) // Disabling CSRF is safe for stateless REST APIs that do not use cookie-based authentication.
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/v1/**").authenticated()
