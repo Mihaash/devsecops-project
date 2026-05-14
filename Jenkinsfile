@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "mickey06/Project"
+        registry = "mickey06/project"
         registryCredential = "docker-creds"
     }
     stages {
@@ -79,7 +79,7 @@ pipeline {
         stage('Stage VII: Scan Image') {
             steps {
                 echo "Scanning Image with Trivy ..."
-                sh "trivy image --timeout 20m --severity HIGH,CRITICAL --exit-code 1 mickey06/democicd:latest"
+                sh "trivy image --timeout 20m --severity HIGH,CRITICAL --exit-code 1 ${registry}:latest > trivyresults.txt"
             }
         }
        
