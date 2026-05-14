@@ -5,21 +5,20 @@ pipeline {
         registryCredential = "docker-creds"
     }
     stages {
-        // 🔹 Stage 1: Build
         stage('Stage I: Build') {
             steps {
                 echo "Building Jar Component ..."
                 sh 'mvn clean package'
             }
         }
-        // 🔹 Stage 2: Code Coverage
+
         stage('Stage II: Code Coverage') {
             steps {
                 echo "Running Code Coverage ..."
                 sh 'mvn jacoco:report'
             }
         }
-        // 🔹 Stage 3: SCA (Dependency Check)
+
         stage('Stage III: SCA') {
             steps {
                 echo "Running Software Composition Analysis ..."
@@ -32,7 +31,7 @@ pipeline {
                 }
             }
         }
-        // 🔹 Stage 4: SAST (SonarQube)
+
         stage('Stage IV: SAST') {
             steps {
                 echo "Running Static Application Security Testing ..."
@@ -47,7 +46,7 @@ pipeline {
                 }
             }
         }
-        // 🔹 Stage 5: Quality Gate (Non-blocking for learning)
+        
         stage('Stage V: Quality Gate') {
             steps {
                 echo "Checking Quality Gate ..."
@@ -67,7 +66,7 @@ pipeline {
                 }
             }
         }
-        // 🔹 Stage 6: Build Docker Image
+        
         stage('Stage VI: Build Image') {
             steps {
                 echo "Building Docker Image ..."
@@ -76,7 +75,7 @@ pipeline {
                 }
             }
         }
-        // 🔹 Stage 7: Trivy Scan (Fail only on HIGH/CRITICAL)
+       
         stage('Stage VII: Scan Image') {
             steps {
                 echo "Scanning Image with Trivy ..."
@@ -89,7 +88,7 @@ pipeline {
                 """
             }
         }
-        // 🔹 Stage 8: Smoke Test
+       
         stage('Stage VIII: Smoke Test') {
             steps {
                 echo "Running Smoke Test ..."
@@ -100,7 +99,7 @@ pipeline {
                 sh "docker rm -f smokerun"
             }
         }
-        // 🔹 Stage 9: Push Docker Image
+        
         stage('Stage IX: Push Image') {
             steps {
                 echo "Pushing Docker Image ..."
@@ -114,7 +113,7 @@ pipeline {
             }
         }
     }
-    // 🔹 Post Actions
+    
     post {
         always {
             echo "Pipeline completed"
