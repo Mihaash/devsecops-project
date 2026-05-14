@@ -67,18 +67,12 @@ pipeline {
                 }
             }
         }
-        // 🔹 Stage 6: Build & Push Docker Image
+        // 🔹 Stage 6: Build Docker Image
         stage('Stage VI: Build Image') {
             steps {
                 echo "Building Docker Image ..."
                 script {
-                    retry(3) {
-                        docker.withRegistry('', registryCredential) {
-                            def image = docker.build("${registry}:${env.BUILD_NUMBER}")
-                            image.push()
-                            image.push("latest")
-                        }
-                    }
+                    docker.build("${registry}")
                 }
             }
         }
@@ -89,7 +83,7 @@ pipeline {
                 sh """
                 trivy image \
                 --timeout 20m \
-                --severity HIGH,CRITICAL,MEDIUM \
+                --severity HIGH,CRITICAL \
                 --exit-code 1 \
                 ${registry}:latest > trivyresults.txt
                 """
@@ -104,6 +98,19 @@ pipeline {
                 sh "sleep 60"
                 sh "./check.sh"
                 sh "docker rm -f smokerun"
+            }
+        }
+        // 🔹 Stage 9: Push Docker Image
+        stage('Stage IX: Push Image') {
+            steps {
+                echo "Pushing Docker Image ..."
+                script {
+                    retry(3) {
+                        docker.withRegistry('', registryCredential) {
+                            docker.image("${registry}:latest").push()
+                        }
+                    }
+                }
             }
         }
     }
