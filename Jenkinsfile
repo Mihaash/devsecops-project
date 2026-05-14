@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "mickey06/democicd"
+        registry = "mickey06/Project"
         registryCredential = "docker-creds"
     }
     stages {
