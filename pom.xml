@@ -30,6 +30,7 @@
         <!-- dependency versions -->
         <com.google.guava.guava.version>33.4.0-jre</com.google.guava.guava.version>
         <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
+        <tomcat.version>10.1.55</tomcat.version>
     </properties>
 
     <dependencies>
